@@ -23,10 +23,10 @@ go-lint:
 all: build test e2e-test go-fmt go-lint
 
 
-promscale-install:
+promscale-stack-install:
 	-kubectl create namespace timescaledb
 	-kubectl config set-context --current --namespace=timescaledb
-	-kubectl get all
+	-kubectl get all -n timescaledb
 	-curl --proto '=https' --tlsv1.2 -sSLf  https://tsdb.co/install-tobs-sh |sh
 	-tobs --namespace timescaledb install
 	-kubectl get all -n timescaledb
@@ -36,7 +36,10 @@ promscale-install:
 	-echo "kubectl -n timescaledb port-forward pod/tobs-timescaledb-0 5432:5432"
 	-echo ""
 
-promscale-clean:
+promscale-stack-clean:
 	-kubectl delete namespace timescaledb
 	-sleep 10
 	-kubectl get all -n timescaledb
+
+promscale-install:
+	-echo "Install"

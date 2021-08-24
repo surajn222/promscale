@@ -38,7 +38,7 @@ connection:
     # used in the above name field.
     secretTemplate:
   # user used to connect to TimescaleDB
-  user: postgres
+  user: root
   password:
     # the template for generating the name of
     # a Secret object containing the password to
@@ -54,12 +54,16 @@ connection:
     # for a host name of a timescaledb instance
     # deployed in the same release (without a cluster override) set:
     #   nameTemplate: {{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local
-    nameTemplate: "{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local"
+    #nameTemplate: "{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local"
+    nameTemplate: "a0661a3a15361441bbff762108c95c00-419130505.us-east-1.elb.amazonaws.com"
   port: 5432
-  sslMode: require
+  sslMode: disable
   # database name in which to store the metrics
   # must be created before start
-  dbName: timescale
+  #dbName: timescale
+  dbName: timeseries
+
+
 
 # Prometheus annotations to configure scraping metrics from the connector
 prometheus:
